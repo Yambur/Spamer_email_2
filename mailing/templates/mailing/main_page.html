@@ -1,0 +1,43 @@
+{%  extends 'mailing/base.html'%}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title">Информация о рассылках</h5></div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td>Количество рассылок всего</td>
+                            <td>{{ mailing_count}}</td>
+                        </tr>
+                        <tr>
+                            <td>Количество активных рассылок</td>
+                            <td>{{ active_mailing_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>Количество уникальных клиентов для рассылок</td>
+                            <td>{{ clients_count }}</td>
+                        </tr>
+
+                    </table>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header"><h5 class="card-title">Посты</h5></div>
+                <div class="card-body">
+                    {% for post in posts %}
+                        {{ post.title }}
+                    {% endfor %}
+                </div>
+
+                <div class="card-footer"></div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
