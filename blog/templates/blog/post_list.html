@@ -1,0 +1,24 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+
+<div class="col-12 mb-5">
+    <a class="btn btn-outline-primary" href="{% url 'blog:post_create' %}">Добавить пост</a>
+</div>
+{% for object in object_list %}
+<div class="col-md-4">
+    <div class="card md-4">
+        <div class="card-header">{{ object|title }}</div>
+        <div class="card-body">{{ object.body }}</div>
+        <div class="card-footer">
+            <div class="btn-group">
+                <a href="{% url 'blog:post_view' object.pk %}" class="btn btn-sm btn-outline-secondary">Показать</a>
+                <a href="{% url 'blog:post_edit' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                <a href="{% url 'blog:post_delete' object.pk %}" type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+{% endblock %}
