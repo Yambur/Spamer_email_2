@@ -16,7 +16,7 @@
                        class="btn btn-sm btn-outline-secondary">Показать</a>
                     <a href="{% url 'mailing:client_edit' object.pk %}"
                        type="button" class="btn btn-sm btn-outline-secondary">Изменить</a>
-                    <a href="{#}"
+                    <a href="{% url 'mailing:client_confirm_delete' object.pk %}"
                        type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
                 </div>
             </div>

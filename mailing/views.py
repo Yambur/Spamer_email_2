@@ -57,7 +57,6 @@ class MailingCreateView(LoginRequiredMixin, CreateView):
         return reverse('mailing:mailing_list')
 
 
-
 class MailingUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование"""
     model = Mailing
@@ -88,6 +87,12 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
     form_class = ClientForm
     success_url = reverse_lazy('mailing:client_list')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
 
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
     """Редактирование"""
@@ -100,6 +105,12 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
         if self.object.owner != self.request.user:
             raise Http404
         return self.object
+
+
+class ClientDeleteView(LoginRequiredMixin, DeleteView):
+    model = Client
+    form_class = ClientForm
+    success_url = reverse_lazy('mailing:client_confirm_delete')
 
 
 class MessageListView(LoginRequiredMixin, ListView):
