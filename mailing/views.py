@@ -73,7 +73,7 @@ class MailingUpdateView(LoginRequiredMixin, UpdateView):
 class MailingDeleteView(LoginRequiredMixin, DeleteView):
     """Удаление"""
     model = Mailing
-    success_url = reverse_lazy('mailing:home')
+    success_url = reverse_lazy('mailing:list')
 
 
 class ClientListView(ListView):
