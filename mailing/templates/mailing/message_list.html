@@ -7,12 +7,23 @@
 </div>
 {% for object in object_list %}
     <div class="col-md-4">
-        <div class="card md-4 box-shadow">
-            <div class="card-body">
-               <p class="card-text"> {{ object }}</p>
-                <div class="d-flex justify-content-between align-items-center"></div>
+    <div class="card md-4 box-shadow">
+        <div class="card-body">
+            <p class="card-text">
+                {{ object }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a href="{% url 'mailing:message_detail' object.pk %}"
+                       class="btn btn-sm btn-outline-secondary">Показать</a>
+                    <a href="{% url 'mailing:message_edit' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-secondary">Изменить</a>
+                    <a href="{% url 'mailing:message_confirm_delete' object.pk %}"
+                       type="button" class="btn btn-sm btn-outline-secondary">Удалить</a>
+                </div>
             </div>
         </div>
     </div>
+</div>
 {% endfor %}
 {% endblock %}

@@ -94,8 +94,16 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+
+class ClientDetailView(LoginRequiredMixin, DetailView):
+    """Детали клиента"""
+    model = Client
+    form_class = ClientForm
+    success_url = reverse_lazy('mailing:client_detail')
+
+
 class ClientUpdateView(LoginRequiredMixin, UpdateView):
-    """Редактирование"""
+    """Редактирование клиента"""
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mailing:client_list')
@@ -108,6 +116,7 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):
+    """Удаление клиента"""
     model = Client
     form_class = ClientForm
     success_url = reverse_lazy('mailing:client_confirm_delete')
@@ -118,11 +127,43 @@ class MessageListView(LoginRequiredMixin, ListView):
     model = Message
 
 
+class MessageDetailView(LoginRequiredMixin, DetailView):
+    """Детальный просмотр сообщений"""
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy('mailing:message_detail')
+
+
 class MessageCreateView(LoginRequiredMixin, CreateView):
     """Создание клиента"""
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailing:message_list')
+
+
+class MessageUpdateView(LoginRequiredMixin, UpdateView):
+    model = Message
+    form_class = MessageForm
+    success_url = reverse_lazy('mailing:message_edit')
+
+    def get_success_url(self):
+        return reverse('mailing:message_edit', args=[self.kwargs.get('pk')])
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+        return super().form_valid(form)
+
+
+class MessageDeleteView(LoginRequiredMixin, DeleteView):
+    model = Message
+    success_url = reverse_lazy('mailing:message_list')
+
+    # success_url = reverse_lazy('mailing:message_confirm_delete')
+
+    # def get_success_url(self):
+    #    return reverse('dogs:message_edit', args=[self.kwargs.get('pk')])
 
 
 class LogListView(ListView):
