@@ -15,6 +15,7 @@ class UserForm(StileFormMixin, UserChangeForm):
     class Meta:
         model = User
         fields = ('email', 'phone', 'avatar')
+        # fields = '__all__'
 
     def __int__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

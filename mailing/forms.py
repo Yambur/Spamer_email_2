@@ -8,7 +8,8 @@ from mailing.services import StileFormMixin
 class ClientForm(StileFormMixin, forms.ModelForm):
     class Meta:
         model = Client
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'comment']
+        #fields = '__all__'
 
 
 class MailingForm(StileFormMixin, forms.ModelForm):

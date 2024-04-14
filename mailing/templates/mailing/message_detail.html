@@ -1,0 +1,30 @@
+{% extends 'mailing/base.html' %}
+
+{% block content %}
+<div class="col-12">
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Информация о сообщении
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td>Тема</td>
+                            <td>{{ object.title }}</td>
+                        </tr>
+                        <tr>
+                            <td>Сообщение</td>
+                            <td>{{ object.text }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <input type="button" onclick="history.back();" value="Назад" style="margin-top: 10px;"/>
+        </div>
+    </div>
+</div>
+{% endblock %}
